@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "LoginScene.h"
+#include "SceneGame.h"
 
 USING_NS_CC;
 
@@ -33,12 +34,23 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
+	//if first
+	bool bfirst = UserDefault::getInstance()->getBoolForKey("first", false);
+	if (!bfirst)
+	{
+		UserDefault::getInstance()->setBoolForKey("first", true);
+		UserDefault::getInstance()->flush();
+		auto scene = LoginScene::createScene();
+		// run
+		director->runWithScene(scene);
+	}
+	else
+	{
+		auto pScene = new SceneGame(0);
+		director->runWithScene(pScene);
+	}
 
-    // create a scene. it's an autorelease object
-    auto scene = LoginScene::createScene();
-
-    // run
-    director->runWithScene(scene);
+ 
 
     return true;
 }

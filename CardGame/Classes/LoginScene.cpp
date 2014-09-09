@@ -1,5 +1,5 @@
 #include "LoginScene.h"
-
+#include "SceneGame.h"
 #include "HelloWorldScene.h"
 #define TAG_CHAT_BG 1
 USING_NS_CC;
@@ -140,7 +140,8 @@ void LoginScene::showNextMsg()
 		}
 		SaveZhuangBei();//保存装备
 		//SaveKaPai();//保存卡牌	
-		auto scene = HelloWorld::createScene();
+		auto scene = new SceneGame(0);
+		//auto scene = HelloWorld::createScene();
 		Director::getInstance()->replaceScene(scene);
 		//SceneManager::sharedSceneManager()->changeScene(SceneManager::en_TollgateScene, true);
 		return;
